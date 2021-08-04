@@ -61,5 +61,5 @@ def driver(api_keys, service, version, args):
           time.sleep(50)
           continue
       except HttpError as e:
-        print('An HTTP error %d occurred:\n%s' % (e.resp.status, e.content))
+        print('Error %d Probable Limit/Quota exceeded: %s' % (e.resp.status, e.content))
         continue
