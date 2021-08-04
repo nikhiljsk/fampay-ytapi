@@ -11,4 +11,5 @@ An E2E project built on Flask Python to fetch, save and display videos asynchron
 7. Fully documented and commented code.
 
 ## Architecture
+![WhatsApp Image 2021-08-04 at 08 25 53](https://user-images.githubusercontent.com/29350756/128118905-288b6797-c969-476d-b5b5-075c6d798e84.jpeg)
 
