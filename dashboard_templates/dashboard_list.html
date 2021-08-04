@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container">
+  <h2>FamPay YT API</h2>
+  <p>Find the latest videos from Youtube!</p>
+  <p>Click on the images to watch the video.</p>
+  {{ pagination.links }}
+  {% for video in videos %}
+  <div class="row">
+    <div class="col-md-4">
+      <div class="thumbnail">
+        <a href={{video.url}} target="_blank">
+          <img src={{video.thumbnail_medium}} alt="Youtube thumbnail" style="width:100%">
+          <div class="caption">
+            <p>{{video.title}}</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+
+</body>
+</html>

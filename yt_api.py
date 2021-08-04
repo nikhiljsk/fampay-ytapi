@@ -6,9 +6,10 @@ from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
 def store_data(new_videos):
-  conn = sql.connect('videos_db28')
+  table_name = "videos_check"
+  conn = sql.connect(table_name)
   try:
-    old_videos = pd.read_sql('select * from videos_db28', conn)
+    old_videos = pd.read_sql('select * from {0}'.format(table_name), conn)
   except Exception as e:
     print("----------SERVER: Creating new table")
     old_videos = pd.DataFrame(data=[], columns=list(new_videos.columns))
@@ -19,7 +20,7 @@ def store_data(new_videos):
   videos.sort_values(by='datetime_obj', ascending=False, inplace=True)
 
   videos.to_csv("./data/{0}.csv".format(str(time.time())), index=False)
-  videos.to_sql('videos_db28', conn, if_exists="append", index=False)
+  videos.to_sql(table_name, conn, if_exists="append", index=False)
 
   conn.commit()
   conn.close()
@@ -57,7 +58,7 @@ def driver(api_keys, service, version, args):
           print("----------SERVER: Successfully fetched data from YT API!!")
           store_data(videos_data)
           print("----------SERVER: Successfully saved data to DB")
-          time.sleep(10)
+          time.sleep(50)
           continue
       except HttpError as e:
         print('An HTTP error %d occurred:\n%s' % (e.resp.status, e.content))
