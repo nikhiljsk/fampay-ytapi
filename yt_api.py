@@ -58,7 +58,7 @@ def driver(api_keys, service, version, args):
           print("----------SERVER: Successfully fetched data from YT API!!")
           store_data(videos_data)
           print("----------SERVER: Successfully saved data to DB")
-          time.sleep(50)
+          time.sleep(args.interval)
           continue
       except HttpError as e:
         print('Error %d Probable Limit/Quota exceeded: %s' % (e.resp.status, e.content))

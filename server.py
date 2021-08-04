@@ -45,6 +45,7 @@ if __name__ == '__main__':
   parser.add_argument('--search', help='Search term', default='Cooking')
   parser.add_argument('--limit', help='Number of result to be limited to', default=10)
   parser.add_argument('--date', help="Videos published after:", default='2021-01-01T00:12:10Z')
+  parser.add_argument('--interval', help="Refresh the DB for every n seconds:", default=100)
   args = parser.parse_args()
 
   configParser = configparser.RawConfigParser()   
