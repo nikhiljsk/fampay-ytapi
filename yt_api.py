@@ -6,6 +6,7 @@ from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
 def store_data(new_videos):
+  # Connect to database and get already saved video data
   table_name = "videos_check"
   conn = sql.connect(table_name)
   try:
@@ -14,11 +15,13 @@ def store_data(new_videos):
     print("----------SERVER: Creating new table")
     old_videos = pd.DataFrame(data=[], columns=list(new_videos.columns))
   
+  # Append the new videos, de-duplication and sorting
   videos = old_videos.append(new_videos)
   videos.drop_duplicates(subset="id", keep="first", inplace=True)
   videos['datetime_obj'] = videos['publishTime'].apply(lambda x: datetime.strptime(x, '%Y-%m-%dT%H:%M:%SZ'))
   videos.sort_values(by='datetime_obj', ascending=False, inplace=True)
 
+  # Save a backup of data to disk
   videos.to_csv("./data/{0}.csv".format(str(time.time())), index=False)
   videos.to_sql(table_name, conn, if_exists="append", index=False)
 
@@ -29,12 +32,14 @@ def store_data(new_videos):
 def search_keyword(args, api_key, service, version):
   youtube_api = build(service, version, developerKey=api_key)
 
+  # Search the youtube for related word/query
   response = youtube_api.search().list(q=args.search, part='id,snippet',
                                 type='video', order='date', maxResults=args.limit,
                                 publishedAfter=args.date).execute()
 
   videos_data = []
 
+  # Store data and fields related to videos
   for item in response.get('items', []):
     videos_data.append({
       "id": item['id']['videoId'],
@@ -51,6 +56,7 @@ def search_keyword(args, api_key, service, version):
   return df_videos
 
 def driver(api_keys, service, version, args):
+  # Failover case for api keys
   for api_key in api_keys:
       try:
         while True:
