@@ -1,9 +1,6 @@
 # FamPay YT API
 An E2E project built on Flask Python to fetch, save and display videos asynchronously from Youtube
 
-## Video Demo
-Please watch this short video for 3 Minutes, of working code showcase
-https://youtu.be/SMNbI6pp7Fc
 
 ## Features
 1. A backend server that asynchronously fetches and saves latest video for a given search query and save it in Database SQL Lite. Also, saves a backup on the disk.
