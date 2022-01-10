@@ -1,4 +1,4 @@
-# FamPay YT API
+# YT API
 An E2E project built on Flask Python to fetch, save and display videos asynchronously from Youtube
 
 
@@ -15,11 +15,4 @@ An E2E project built on Flask Python to fetch, save and display videos asynchron
 ## Architecture
 ![WhatsApp Image 2021-08-04 at 08 25 53](https://user-images.githubusercontent.com/29350756/128118905-288b6797-c969-476d-b5b5-075c6d798e84.jpeg)
 
-
-## Futher Scope
-Things I though of doing, but couldn't due to time constraints
-1. Implementing Word2Vec in Search API, so that we can match even synonyms.
-2. Better dashboad using Bootstrap
-
-I enjoyed doing this project. Thanks for the team at FamPay!
-Thanks & Cheer!
+Cheers!
